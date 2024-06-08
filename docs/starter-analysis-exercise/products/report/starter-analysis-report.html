@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Your Name">
+<meta name="author" content="Nicholas Stevenson">
 <meta name="dcterms.date" content="2024-06-07">
 
-<title>YOURNAME Data Analysis Portfolio - Manuscript/Report Template for a Data Analysis Project</title>
+<title>Nicholas Stevenson - Data Analysis Portfolio - Manuscript/Report Template for a Data Analysis Project</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -56,10 +56,10 @@ div.csl-indent {
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -92,7 +92,7 @@ div.csl-indent {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="../../../index.html">
-    <span class="navbar-title">YOURNAME Data Analysis Portfolio</span>
+    <span class="navbar-title">Nicholas Stevenson - Data Analysis Portfolio</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -131,7 +131,7 @@ div.csl-indent {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="../../../URL-TO-THIS-REPOSITORY-HERE" rel="" target=""><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/yosoynoob/NicholasStevenson-P2-Portfolio" rel="" target=""><i class="bi bi-github" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -162,7 +162,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Your Name </p>
+             <p>Nicholas Stevenson </p>
           </div>
   </div>
     
@@ -183,22 +183,23 @@ div.csl-indent {
 <p>This uses MS Word as output format. <a href="https://quarto.org/docs/output-formats/ms-word.html">See here</a> for more information. You can switch to other formats, like html or pdf. See <a href="https://quarto.org/">the Quarto documentation</a> for other formats.</p>
 <section id="summaryabstract" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Summary/Abstract</h1>
-<p><em>Write a summary of your project.</em></p>
+<p>This study is will be used to determine what the correlation is between winning and losing teams in the NFL and the amount of salary each team is spending.</p>
 <div style="page-break-after: always;"></div>
 </section>
 <section id="introduction" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Introduction</h1>
 <section id="general-background-information" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="general-background-information"><span class="header-section-number">2.1</span> General Background Information</h2>
-<p><em>Provide enough background on your topic that others can understand the why and how of your analysis</em></p>
+<p>I think it’s safe to say that many of us may be familiar with the movie Moneyball. The movie, based on the book of the same title, follows a team with one of the lowest payrolls in Major League Baseball as they catapult to the playoffs to compete for the championship against teams with unending resources. The team, the Oakland Athletics, was able to do this by using a more advanced statistical approach to evaluating players for their team. This allowed them to find hidden value in the player market that other teams were not aware of. This has always been fascinating and it led me to wonder how this might work in other leagues. I decided to take a closer look at the National Football League.</p>
+<p>While I will not be studying advanced football statistics to measure a player’s “hidden” value, I will be looking at where they rank in terms of salary and how much of an impact they have in their team’s winning percentage.</p>
 </section>
 <section id="description-of-data-and-data-source" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="description-of-data-and-data-source"><span class="header-section-number">2.2</span> Description of data and data source</h2>
-<p><em>Describe what the data is, what it contains, where it is from, etc. Eventually this might be part of a methods section.</em></p>
+<p>The data is contains a recap of the 2023 NFL season which includes such variables as wins, losses, points scored, total offense, total defense as well as the amount of money the teams are spending in salary. The data will be from Sportrac.com, overthecap.com, profootballreference.com, and espn.com.</p>
 </section>
 <section id="questionshypotheses-to-be-addressed" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="questionshypotheses-to-be-addressed"><span class="header-section-number">2.3</span> Questions/Hypotheses to be addressed</h2>
-<p><em>State the research questions you plan to answer with this analysis.</em></p>
+<p>The most obvious question is, do teams that spend the most on salary tend to have higher winning percentages? But the question that I will focus on is, where is the value? When you look at a winning team, there is generally a player, or a group of players, that are playing beyond their salary, i.e., these players are playing above expectations and are therefore considered a good or great value for their respective teams. Is there a common value among certain positions? Or is the value to be found in those players strictly on rookie contracts?</p>
 <p>To cite other work (important everywhere, but likely happens first in introduction), make sure your references are in the bibtex file specified in the YAML header above (here <code>dataanalysis_template_references.bib</code>) and have the right bibtex key. Then you can include like this:</p>
 <p>Examples of reproducible research projects can for instance be found in <span class="citation" data-cites="mckay2020 mckay2020a">(<a href="#ref-mckay2020" role="doc-biblioref">McKay, Ebell, Billings, et al., 2020</a>; <a href="#ref-mckay2020a" role="doc-biblioref">McKay, Ebell, Dale, Shen, &amp; Handel, 2020</a>)</span></p>
 <div style="page-break-after: always;"></div>
@@ -206,7 +207,7 @@ div.csl-indent {
 </section>
 <section id="methods" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Methods</h1>
-<p><em>Describe your methods. That should describe the data, the cleaning processes, and the analysis approaches. You might want to provide a shorter description here and all the details in the supplement.</em></p>
+<p>I will perform an initial exploratory data analysis to visualize the data and get an understanding of the patterns and relationships between variables.</p>
 <section id="data-aquisition" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="data-aquisition"><span class="header-section-number">3.1</span> Data aquisition</h2>
 <p><em>As applicable, explain where and how you got the data. If you directly import the data from an online source, you can combine this section with the next.</em></p>
