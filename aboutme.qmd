@@ -2,6 +2,37 @@
 title: "About me"
 ---
 
-Add some text and a figure describing myself.
+```{r}
+#| label = "setup",
+#| include = FALSE
 
-For details, see the exercise instructions. 
+library(tidyverse)
+cleanrmd::use_cleanrmd("holiday")
+```
+
+
+
+
+![](profile_picture.png)
+
+## By now you are probably wondering, who *is* this man? Like, "buddy, get on with it! WE NEED TO KNOW YOUR NAME!"
+
+First of all, lower your tone. My name is Nick Stevenson. Nice to meet you! I am a current master's student at the University of Texas at San Antonio studying data analytics. While I am now in my third semester of grad school, I am still relatively new to the field of data science. Currently I work for the United States Postal Service. In the market for some stamps? I may know a guy...
+
+# Technical Experiece
+
+-   Python
+-   R
+-   SQL
+-   SAS
+-   Tableau
+
+# Research Interests
+
+What I am most eager to learn from the MS program are the tools necessary to strengthen my knowledge in the area of statistical analysis.
+
+# Recommended Resources
+
+[Storytelling With Data](https://www.storytellingwithdata.com/)
+
+Storytelling With Data is a space where those interested in improving their personal data visualization and communication skills can join a community to connect with others, share their work, practice, and give and receive feedback. This is a great tool for those looking to polish their storytelling skills when it comes to visualization!
