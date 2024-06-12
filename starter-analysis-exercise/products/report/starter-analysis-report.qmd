@@ -43,6 +43,9 @@ While I will not be studying advanced football statistics to measure a player's 
 ## Description of data and data source
 The data is contains a recap of the 2023 NFL season which includes such variables as wins, losses, points scored, total offense, total defense as well as the amount of money the teams are spending in salary. The data will be from Sportrac.com, overthecap.com, profootballreference.com, and espn.com. 
 
+### Assignment 2: Data Analysis
+The variables 'Age' and 'Dating App' were added to the worksheet. Age will be a numerical value in years. Dating App will be a categorical value; Bumble, Hinge, Tinder and NA will be accepted values.
+
 ## Questions/Hypotheses to be addressed
 The most obvious question is, do teams that spend the most on salary tend to have higher winning percentages? But the question that I will focus on is, where is the value? When you look at a winning team, there is generally a player, or a group of players, that are playing beyond their salary, i.e., these players are playing above expectations and are therefore considered a good or great value for their respective teams. Is there a common value among certain positions? Or is the value to be found in those players strictly on rookie contracts?
 
