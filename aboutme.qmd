@@ -19,7 +19,7 @@ cleanrmd::use_cleanrmd("holiday")
 
 First of all, lower your tone. My name is Nick Stevenson. Nice to meet you! I am a current master's student at the University of Texas at San Antonio studying data analytics. While I am now in my third semester of grad school, I am still relatively new to the field of data science. Currently I work for the United States Postal Service. In the market for some stamps? I may know a guy...
 
-# Technical Experiece
+# Technical Experience
 
 -   Python
 -   R
