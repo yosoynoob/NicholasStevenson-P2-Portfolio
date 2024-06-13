@@ -109,7 +109,7 @@
     "href": "starter-analysis-exercise/products/report/starter-analysis-report.html#description-of-data-and-data-source",
     "title": "Manuscript/Report Template for a Data Analysis Project",
     "section": "2.2 Description of data and data source",
-    "text": "2.2 Description of data and data source\nThe data is contains a recap of the 2023 NFL season which includes such variables as wins, losses, points scored, total offense, total defense as well as the amount of money the teams are spending in salary. The data will be from Sportrac.com, overthecap.com, profootballreference.com, and espn.com."
+    "text": "2.2 Description of data and data source\nThe data is contains a recap of the 2023 NFL season which includes such variables as wins, losses, points scored, total offense, total defense as well as the amount of money the teams are spending in salary. The data will be from Sportrac.com, overthecap.com, profootballreference.com, and espn.com.\n\n2.2.1 Assignment 2: Data Analysis\nThe variables ‘Age’ and ‘Dating App’ were added to the worksheet. Age will be a numerical value in years. Dating App will be a categorical value; Bumble, Hinge, Tinder and NA will be accepted values."
   },
   {
     "objectID": "starter-analysis-exercise/products/report/starter-analysis-report.html#questionshypotheses-to-be-addressed",
