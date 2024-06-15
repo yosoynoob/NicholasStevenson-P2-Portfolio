@@ -12,6 +12,8 @@ bibliography: ../dataanalysis-template-references.bib
 csl: ../apa.csl
 ---
 
+Austin Thrash contributed to this exercise.
+
 The structure below is one possible setup for a data analysis project (including the course project). For a manuscript, adjust as needed. 
 You don't need to have exactly these sections, but the content covering those sections should be addressed.
 
@@ -122,10 +124,18 @@ Example @tbl-resulttable2 shows a summary of a linear model fit.
 #| label: tbl-resulttable2
 #| tbl-cap: "Linear model fit table."
 #| echo: FALSE
-resulttable2 = readRDS(here("starter-analysis-exercise","results","tables-files","resulttable2.rds"))
+resulttable3 = readRDS(here("starter-analysis-exercise","results","tables-files","resulttable3.rds"))
 knitr::kable(resulttable2)
 ```
 
+
+```{r}
+knitr::include_graphics(here("starter-analysis-exercise","results","figures","Age-Height.png"))
+```
+
+```{r}
+knitr::include_graphics(here("starter-analysis-exercise","results","figures","Dating_App-weight.png"))
+```
 
 {{< pagebreak >}}
 

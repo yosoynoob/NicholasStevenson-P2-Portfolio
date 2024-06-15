@@ -1,6 +1,6 @@
 ---
 title: "An example exploratory analysis script"
-author: "Andreas Handel"
+author: "Nicholas Stevenson"
 date: "10/28/2021"
 output: html_document
 ---
@@ -105,7 +105,22 @@ figure_file = here("starter-analysis-exercise","results","figures","height-weigh
 ggsave(filename = figure_file, plot=p4) 
 ```
 
+#boxplot with new variable
+```{r}
+p5 <- mydata %>% ggplot(aes(x=Age, y=Height)) + geom_boxplot()
+plot(p5)
+figure_file = here("starter-analysis-exercise","results","figures","Age-Height.png")
+ggsave(filename = figure_file, plot=p5) 
+```
 
+
+```{r}
+#scatter plot with new variable
+p6 <- mydata %>% ggplot(aes(x=Weight, y=Dating_App)) + geom_point()
+plot(p6)
+figure_file = here("starter-analysis-exercise","results","figures","Dating_App-weight.png")
+ggsave(filename = figure_file, plot=p6) 
+```
 
 # Notes
 
