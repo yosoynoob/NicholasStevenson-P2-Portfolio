@@ -107,7 +107,7 @@ ggsave(filename = figure_file, plot=p4)
 
 ```{r}
 #Once values are added to the dating app and age variable, this will generate the graph showing the relationship
-p5 <- mydata %>% ggplot(aes(x=`Dating App`, y=Age)) + geom_boxplot()
+p5 <- mydata %>% ggplot(aes(x=`Dating_App`, y=Age)) + geom_boxplot()
 plot(p5)
 figure_file = here("starter-analysis-exercise","results","figures","dating-age.png")
 ggsave(filename = figure_file, plot=p5) 

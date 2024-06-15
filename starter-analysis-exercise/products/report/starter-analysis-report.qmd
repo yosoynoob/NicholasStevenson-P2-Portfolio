@@ -125,7 +125,7 @@ Example @tbl-resulttable2 shows a summary of a linear model fit.
 #| tbl-cap: "Linear model fit table."
 #| echo: FALSE
 resulttable3 = readRDS(here("starter-analysis-exercise","results","tables-files","resulttable3.rds"))
-knitr::kable(resulttable2)
+knitr::kable(resulttable3)
 ```
 
 
