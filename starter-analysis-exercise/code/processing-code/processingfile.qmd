@@ -1,6 +1,6 @@
 ---
 title: "An example cleaning script"
-author: "Andreas Handel"
+author: "Nicholas Stevenson"
 date: "2023-01-03"
 output: html_document
 ---
@@ -33,7 +33,7 @@ but it adds typing. You can do it either way.
 ```{r}
 # path to data
 # note the use of the here() package and not absolute paths
-data_location <- here::here("starter-analysis-exercise","data","raw-data","exampledata.xlsx")
+data_location <- here::here("starter-analysis-exercise","data","raw-data","exampledata2.xlsx")
 rawdata <- readxl::read_excel(data_location)
 ```
 
