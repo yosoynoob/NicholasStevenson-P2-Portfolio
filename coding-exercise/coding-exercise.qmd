@@ -2,4 +2,195 @@
 title: "R Coding Exercise"
 ---
 
-Placeholder file for the future R coding exercise.
+```{r, warning=FALSE}
+#load dslabs and tidyverse package
+library(dslabs)
+library(tidyverse)
+```
+
+```{r}
+#get an overview of data structure
+str(gapminder)
+```
+
+```{r}
+#get a summary of data
+summary(gapminder)
+```
+
+```{r}
+#determine the type of object gapminder is
+class(gapminder)
+```
+# **Processing Data**
+
+Write code that assigns only the African countries to a new object/variable called `africadata`. Run str and summary on the new object you created. You should now have 2907 observations, down from 10545. Depending on how you do this, you might also notice that all the different categories are still kept in the continent (and other) variables, but show 0. R does not automatically remove categories of what in R is called a factor variable (a categorical variable) even if they are empty. We don’t have to worry about that just now, but something to keep in mind, it can sometimes lead to strange behavior.
+
+Take the `africadata` object and create two new objects (name them whatever you want), one that contains only `infant_mortality` and `life_expectancy` and one that contains only `population` and `life_expectancy`. You should have two new objects/variables with 2907 rows and two columns. Use the str, and summary commands to take a look at both. Make sure you add comments into your code to explain what each line of code is doing, and as needed, also add additional explanatory Markdown text to your Quarto file.
+
+```{r}
+#filter only African countries
+africadata <- gapminder %>%
+  filter(continent == "Africa")
+```
+
+```{r}
+#check the data structure of the object `africadata`
+str(africadata)
+```
+
+```{r}
+#get a summary of the new data
+summary(africadata)
+```
+
+```{r}
+#Create the first object containing only infant_mortality and life_expectancy
+infant_mortality_life_expectancy <- africadata %>%
+  select(infant_mortality, life_expectancy)
+```
+
+```{r}
+#check the data structure of the new object infant_mortality_life_expectancy
+str(infant_mortality_life_expectancy)
+```
+
+```{r}
+#check the summary of the new object infant_mortality_life_expectancy
+summary(infant_mortality_life_expectancy)
+```
+
+```{r}
+#Create the second object containing only population and life_expectancy
+population_life_expectancy <- africadata %>% 
+  select(population, life_expectancy)
+```
+
+```{r}
+#check the data structure of the new object population_life_expectancy
+str(population_life_expectancy)
+```
+
+```{r}
+#check the summary of the new object population_life_expectancy
+summary(population_life_expectancy)
+```
+
+# **Plotting**
+
+Using the new variables you created, plot life expectancy as a function of infant mortality and as a function of population size. Make two separate plots. Plot the data as points. For the plot with population size on the x-axis, set the x-axis to a log scale.
+```{r}
+plot1 <- ggplot(infant_mortality_life_expectancy, aes(x = infant_mortality, y = life_expectancy)) +
+  geom_point() +
+  labs(title = "Life Expectancy vs Infant Mortality",
+       x = "Infant Mortality",
+       y = "Life Expectancy") +
+  theme_get()
+
+print(plot1)
+```
+
+```{r}
+plot2 <- ggplot(population_life_expectancy, aes(x = population, y = life_expectancy)) +
+  geom_point() +
+  scale_x_log10() +
+  labs(title = "Life Expectancy vs Population Size (Log Scale)",
+       x = "Population Size (Log Scale)",
+       y = "Life Expectancy") +
+  theme_get()
+
+print(plot2)
+```
+
+# **Plotting cont'd**
+
+You should see a negative correlation between infant mortality and life expectancy, which makes sense. You should also see a positive correlation between population size and life expectancy. In both plots, especially the second one, you will see 'streaks' of data that seem to go together. Can you figure out what is going on here? Take another look at the `africadata` data we generated, which should give you a hint of what's happening. Add descriptive text into your Quarto file to explain what you see and why.
+
+```{r}
+head(africadata)
+```
+
+```{r}
+str(africadata)
+```
+
+Upon further research into the new objects, we can surmise the reason for the 'streaks' in our plots is due to the grouping of country and year.
+
+# **More data processing**
+
+ Let’s pick only one year and see what patterns we find. We want a year for which we have the most data. You might have noticed that in `africadata`, there are 226 NA (i.e., missing values) for infant mortality. Write code that figures out which years have missing data for infant mortality. You should find that there is missing up to 1981 and then again for 2016. So we’ll avoid those years and go with 2000 instead. Create a new object by extracting only the data for the year 2000 from the `africadata` object. You should end up with 51 observations and 9 variables. Check it with **str()** and **summary()**.
+```{r}
+#Create new object to determine which years have missing data for infant mortality
+missing_infant_mortality <- africadata %>% 
+  filter(is.na(infant_mortality)) %>% 
+  group_by(year) %>% 
+  summarize(missing_count = n())
+
+print(missing_infant_mortality)
+```
+```{r}
+#Create new object with data from the year 2000
+year_2000 <- africadata %>% 
+  filter(year=="2000")
+```
+
+```{r}
+#Verify data by using head() and str() fucntinons
+head(year_2000)
+str(year_2000)
+```
+# **More Plotting**
+
+Let’s make the same plots as above again, this time only for the year 2000. Based on those plots, there seems to still be a negative correlation between infant mortality and life expectancy, and no noticeable correlation between population size and life expectancy. Let’s apply some statistical model to this data.
+```{r}
+#Create a plot showing life expectancy as a function of infant mortality
+plot1_2000 <- ggplot(year_2000, aes(x = infant_mortality, y = life_expectancy)) +
+  geom_point() +
+  labs(title = "Life Expectancy vs Infant Mortality (Year 2000)",
+       x = "Infant Mortality",
+       y = "Life Expectancy") +
+  theme_get()
+
+# Display Plot 1
+print(plot1_2000)
+```
+```{r}
+#Create a plot showing life expectancy as a function of population
+plot2_2000 <- ggplot(year_2000, aes(x = population, y = life_expectancy)) +
+  geom_point() +
+  scale_x_log10() +
+  labs(title = "Life Expectancy vs Population Size (Log Scale, Year 2000)",
+       x = "Population (Log Scale)",
+       y = "Life Expectancy") +
+  theme_get()
+
+# Display Plot 1
+print(plot2_2000)
+```
+# **Simple model fits**
+
+Use the **lm()** function and fit life expectancy as the outcome, and infant mortality as the predictor. Then repeat, now with the population size as the predictor variable. (Use the data from 2000 only.) Save the result from the two fits into two objects (e.g. fit1 and fit2) and apply the summary command to both, which will print various fit results to the screen. Based on the p-values for each fit, what do you conclude? Add comments into your quarto file to explain what you did and found.
+```{r}
+# Fit 1: Life Expectancy as the outcome and Infant Mortality as the predictor
+fit1 <- lm(life_expectancy ~ infant_mortality, year_2000)
+
+# Fit 2: Life Expectancy as the outcome and Population Size as the predictor
+fit2 <- lm(life_expectancy ~ population, year_2000)
+```
+
+```{r}
+summary(fit1)
+```
+```{r}
+summary(fit2)
+```
+# **Results**
+
+Based on the p-values for each fit:
+
+Model 1 (Life Expectancy vs. Infant Mortality): The p-value for the infant mortality coefficient is < 0.05, indicating a statistically significant negative relationship between infant mortality and life expectancy. This means that as infant mortality increases, life expectancy decreases, which is expected.
+
+Model 2 (Life Expectancy vs. Population Size): The p-value for the population size coefficient is > 0.05, indicating a lack of statistical significance. This suggests that there is no strong evidence of a linear relationship between population size and life expectancy based on this dataset.
+
+These results help us understand the factors affecting life expectancy in African countries in the year 2000. While infant mortality shows a clear and significant impact, population size does not appear to have a significant linear effect.
+
