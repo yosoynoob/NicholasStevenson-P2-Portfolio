@@ -22,9 +22,10 @@ summary(gapminder)
 #determine the type of object gapminder is
 class(gapminder)
 ```
+
 # **Processing Data**
 
-Write code that assigns only the African countries to a new object/variable called `africadata`. Run str and summary on the new object you created. You should now have 2907 observations, down from 10545. Depending on how you do this, you might also notice that all the different categories are still kept in the continent (and other) variables, but show 0. R does not automatically remove categories of what in R is called a factor variable (a categorical variable) even if they are empty. We don’t have to worry about that just now, but something to keep in mind, it can sometimes lead to strange behavior.
+Write code that assigns only the African countries to a new object/variable called `africadata`. Run str and summary on the new object you created. You should now have 2907 observations, down from 10545. Depending on how you do this, you might also notice that all the different categories are still kept in the continent (and other) variables, but show 0. R does not automatically remove categories of what in R is called a factor variable (a categorical variable) even if they are empty. We don't have to worry about that just now, but something to keep in mind, it can sometimes lead to strange behavior.
 
 Take the `africadata` object and create two new objects (name them whatever you want), one that contains only `infant_mortality` and `life_expectancy` and one that contains only `population` and `life_expectancy`. You should have two new objects/variables with 2907 rows and two columns. Use the str, and summary commands to take a look at both. Make sure you add comments into your code to explain what each line of code is doing, and as needed, also add additional explanatory Markdown text to your Quarto file.
 
@@ -79,6 +80,7 @@ summary(population_life_expectancy)
 # **Plotting**
 
 Using the new variables you created, plot life expectancy as a function of infant mortality and as a function of population size. Make two separate plots. Plot the data as points. For the plot with population size on the x-axis, set the x-axis to a log scale.
+
 ```{r}
 plot1 <- ggplot(infant_mortality_life_expectancy, aes(x = infant_mortality, y = life_expectancy)) +
   geom_point() +
@@ -118,7 +120,8 @@ Upon further research into the new objects, we can surmise the reason for the 's
 
 # **More data processing**
 
- Let’s pick only one year and see what patterns we find. We want a year for which we have the most data. You might have noticed that in `africadata`, there are 226 NA (i.e., missing values) for infant mortality. Write code that figures out which years have missing data for infant mortality. You should find that there is missing up to 1981 and then again for 2016. So we’ll avoid those years and go with 2000 instead. Create a new object by extracting only the data for the year 2000 from the `africadata` object. You should end up with 51 observations and 9 variables. Check it with **str()** and **summary()**.
+Let's pick only one year and see what patterns we find. We want a year for which we have the most data. You might have noticed that in `africadata`, there are 226 NA (i.e., missing values) for infant mortality. Write code that figures out which years have missing data for infant mortality. You should find that there is missing up to 1981 and then again for 2016. So we'll avoid those years and go with 2000 instead. Create a new object by extracting only the data for the year 2000 from the `africadata` object. You should end up with 51 observations and 9 variables. Check it with **str()** and **summary()**.
+
 ```{r}
 #Create new object to determine which years have missing data for infant mortality
 missing_infant_mortality <- africadata %>% 
@@ -128,6 +131,7 @@ missing_infant_mortality <- africadata %>%
 
 print(missing_infant_mortality)
 ```
+
 ```{r}
 #Create new object with data from the year 2000
 year_2000 <- africadata %>% 
@@ -139,9 +143,11 @@ year_2000 <- africadata %>%
 head(year_2000)
 str(year_2000)
 ```
+
 # **More Plotting**
 
-Let’s make the same plots as above again, this time only for the year 2000. Based on those plots, there seems to still be a negative correlation between infant mortality and life expectancy, and no noticeable correlation between population size and life expectancy. Let’s apply some statistical model to this data.
+Let's make the same plots as above again, this time only for the year 2000. Based on those plots, there seems to still be a negative correlation between infant mortality and life expectancy, and no noticeable correlation between population size and life expectancy. Let's apply some statistical model to this data.
+
 ```{r}
 #Create a plot showing life expectancy as a function of infant mortality
 plot1_2000 <- ggplot(year_2000, aes(x = infant_mortality, y = life_expectancy)) +
@@ -154,6 +160,7 @@ plot1_2000 <- ggplot(year_2000, aes(x = infant_mortality, y = life_expectancy)) 
 # Display Plot 1
 print(plot1_2000)
 ```
+
 ```{r}
 #Create a plot showing life expectancy as a function of population
 plot2_2000 <- ggplot(year_2000, aes(x = population, y = life_expectancy)) +
@@ -167,9 +174,11 @@ plot2_2000 <- ggplot(year_2000, aes(x = population, y = life_expectancy)) +
 # Display Plot 1
 print(plot2_2000)
 ```
+
 # **Simple model fits**
 
 Use the **lm()** function and fit life expectancy as the outcome, and infant mortality as the predictor. Then repeat, now with the population size as the predictor variable. (Use the data from 2000 only.) Save the result from the two fits into two objects (e.g. fit1 and fit2) and apply the summary command to both, which will print various fit results to the screen. Based on the p-values for each fit, what do you conclude? Add comments into your quarto file to explain what you did and found.
+
 ```{r}
 # Fit 1: Life Expectancy as the outcome and Infant Mortality as the predictor
 fit1 <- lm(life_expectancy ~ infant_mortality, year_2000)
@@ -181,16 +190,124 @@ fit2 <- lm(life_expectancy ~ population, year_2000)
 ```{r}
 summary(fit1)
 ```
+
 ```{r}
 summary(fit2)
 ```
+
 # **Results**
 
 Based on the p-values for each fit:
 
-Model 1 (Life Expectancy vs. Infant Mortality): The p-value for the infant mortality coefficient is < 0.05, indicating a statistically significant negative relationship between infant mortality and life expectancy. This means that as infant mortality increases, life expectancy decreases, which is expected.
+Model 1 (Life Expectancy vs. Infant Mortality): The p-value for the infant mortality coefficient is \< 0.05, indicating a statistically significant negative relationship between infant mortality and life expectancy. This means that as infant mortality increases, life expectancy decreases, which is expected.
 
-Model 2 (Life Expectancy vs. Population Size): The p-value for the population size coefficient is > 0.05, indicating a lack of statistical significance. This suggests that there is no strong evidence of a linear relationship between population size and life expectancy based on this dataset.
+Model 2 (Life Expectancy vs. Population Size): The p-value for the population size coefficient is \> 0.05, indicating a lack of statistical significance. This suggests that there is no strong evidence of a linear relationship between population size and life expectancy based on this dataset.
 
 These results help us understand the factors affecting life expectancy in African countries in the year 2000. While infant mortality shows a clear and significant impact, population size does not appear to have a significant linear effect.
 
+# Assignment Part 2
+
+**This section contributed by Austin Thrash - FFK221**
+
+## More data exploration
+
+Pick another dataset from `dslabs`, whichever one you want. Unfortunately, the `dslabs` package doesn\'t have a nice website. But you can go to [its offical CRAN entryLinks to an external site.](https://cran.r-project.org/web/packages/dslabs/index.html) and click on *Reference Manual*. The pdf lists the various other datasets and for each provides a brief explanation.
+
+Once you chose one of the datasets, write R code to go through similar steps as above. Specifically, do the following:
+
+-   Explore the dataset.
+
+-   Do any processing/cleaning you want to do.
+
+-   Make a few exploratory figures. Optionally, also some tables.
+
+-   Run some simple statistical model(s). Your choice.
+
+-   Report the results from the model(s).
+
+-   For each step, add plenty comments to the code and explanatory Markdown text to the Quarto file.
+
+## Explore the dataset
+
+```{r}
+# Printing structure and summary of 'mice_weights' dataset
+
+str(mice_weights)
+
+summary(mice_weights)
+```
+
+## Data Processing/Cleaning
+
+```{r}
+# Removing NA's and checking to see if there are any missing values, there are 8. 4 in 'bone_density' and 4 in 'percent_fat' as seen above
+
+mice <- mice_weights %>% drop_na()
+
+sum(is.na(mice))
+```
+
+## Exploratory Figures
+
+```{r}
+# Looking at distribution of sex
+
+plot_1 <- ggplot(mice, aes(x = sex)) +
+  geom_histogram(stat = "count")  +
+  labs(title = "Sex Distribution",
+       x = "Sex",
+       y = "Count") +
+  theme_get()
+
+print(plot_1)
+```
+
+```{r}
+# Plotting bone density as a function of body weight to identify if there is any relationship between the two
+
+plot_2 <- ggplot(mice, aes(x = body_weight, y = bone_density)) +
+  geom_point()  +
+  labs(title = "Body Weight vs Bone Density",
+       x = "Body Weight",
+       y = "Bone Density") +
+  theme_get()
+
+print(plot_2)
+```
+
+```{r}
+# Plotting percent fat as a function of body weight to identify if there is any relationship between the two
+
+plot_3 <- ggplot(mice, aes(x = body_weight, y = percent_fat)) +
+  geom_point()  +
+  labs(title = "Body Weight vs Percent Fat",
+       x = "Body Weight",
+       y = "Percent Fat") +
+  theme_get()
+
+print(plot_3)
+```
+
+As we can see from the models above, it looks as if there is a positive linear relationship between percent fat/bone density and body weight (which is to be expected). Therefore we will use these features during statistical modeling.
+
+## Statistical Models
+
+```{r}
+# Fit 1: Body Weight as the outcome and Bone Density as the predictor
+fit_1 <- lm(body_weight ~ bone_density, mice)
+
+# Fit 2: Body Weight as the outcome and Percent Fat as the predictor
+fit_2 <- lm(body_weight ~ percent_fat, mice)
+```
+
+```{r}
+summary(fit_1)
+```
+
+```{r}
+summary(fit_2)
+```
+
+## Results
+
+We can see from the results above that both bone density and percent fat have a statistically significant relationship with body fat; both predictors have a p-value less than 0.05. The first results show that for every one unit increase in bone_density, we can expect to see a 26.139 increase in body_weight. The second results show that for every one unit increase in percent_fat, we expect to see a 1.45918 increase in weight.
