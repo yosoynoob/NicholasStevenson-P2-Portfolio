@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Nicholas Stevenson">
-<meta name="dcterms.date" content="2024-06-22">
+<meta name="dcterms.date" content="2024-06-25">
 
 <title>Nicholas Stevenson - Data Analysis Portfolio - eda3</title>
 <style>
@@ -184,7 +184,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 22, 2024</p>
+      <p class="date">June 25, 2024</p>
     </div>
   </div>
   
@@ -217,7 +217,9 @@ Attaching package: 'dplyr'</code></pre>
     intersect, setdiff, setequal, union</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(skimr)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggimage)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Load the data.</p>
 <div class="cell">
@@ -227,47 +229,27 @@ Attaching package: 'dplyr'</code></pre>
 </div>
 <section id="check-data" class="level1">
 <h1>Check data</h1>
-<p>First we can look at the Stats</p>
+<p>First we can look at our data</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Stats <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(NFL_data, <span class="at">sheet =</span><span class="st">"Stats"</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Stats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 32 × 6
-   Team                Wins Losses Win_Loss_Percentage Points_For Points_Against
-   &lt;chr&gt;              &lt;dbl&gt;  &lt;dbl&gt;               &lt;dbl&gt;      &lt;dbl&gt;          &lt;dbl&gt;
- 1 Arizona Cardinals      4     13               0.235        330            455
- 2 Atlanta Falcons        7     10               0.412        321            373
- 3 Baltimore Ravens      13      4               0.765        483            280
- 4 Buffalo Bills         11      6               0.647        451            311
- 5 Carolina Panthers      2     15               0.118        236            416
- 6 Chicago Bears          7     10               0.412        360            379
- 7 Cincinnati Bengals     9      8               0.529        366            384
- 8 Cleveland Browns      11      6               0.647        396            362
- 9 Dallas Cowboys        12      5               0.706        509            315
-10 Denver Broncos         8      9               0.471        357            413
-# ℹ 22 more rows</code></pre>
-</div>
-</div>
-<p>Next, we will look at the Salary expenditure.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>Salary <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(NFL_data, <span class="at">sheet =</span><span class="st">"Salary"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Salary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 32 × 8
-   Team                RECORD PLAYERSACTIVE `AVG AGETEAM` `TOTAL CAPALLOCATIONS`
-   &lt;chr&gt;               &lt;chr&gt;          &lt;dbl&gt;         &lt;dbl&gt;                  &lt;dbl&gt;
- 1 Carolina Panthers   2-15-…            53          26.9              232771942
- 2 Philladelphia Eagl… 11-6-…            53          26.6              232097112
- 3 Denver Broncos      8-9-0&nbsp;            53          26.3              231774113
- 4 Buffalo Bills       11-6-…            53          27                228646643
- 5 Chicago Bears       7-10-…            52          26.1              227512044
- 6 Houston Texans      10-7-…            53          27.2              226978543
- 7 Pittsburgh Steelers 10-7-…            53          26.5              226204705
- 8 Miami Dolphins      11-6-…            53          27.1              223975605
- 9 Indianpolis Colts   9-8-0&nbsp;            53          25.7              223873320
-10 Detroit Lions       12-5-…            53          26                223688752
+<pre><code># A tibble: 32 × 12
+   Team       Wins Losses Win_Percentage Points_For Points_Against PLAYERSACTIVE
+   &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;          &lt;dbl&gt;      &lt;dbl&gt;          &lt;dbl&gt;         &lt;dbl&gt;
+ 1 Arizona …     4     13          0.235        330            455            53
+ 2 Atlanta …     7     10          0.529        321            373            54
+ 3 Baltimor…    13      4          0.765        483            280            53
+ 4 Buffalo …    11      6          0.647        451            311            53
+ 5 Carolina…     2     15          0.118        236            416            53
+ 6 Chicago …     7     10          0.412        360            379            52
+ 7 Cincinna…     9      8          0.529        366            384            53
+ 8 Clevelan…    11      6          0.647        396            362            53
+ 9 Dallas C…    12      5          0.706        509            315            53
+10 Denver B…     8      9          0.471        357            413            53
 # ℹ 22 more rows
-# ℹ 3 more variables: `CAP SPACEALL` &lt;dbl&gt;, `ACTIVE53-MAN` &lt;dbl&gt;, DEADCAP &lt;dbl&gt;</code></pre>
+# ℹ 5 more variables: `AVG AGETEAM` &lt;dbl&gt;, TOTAL_CAPALLOCATIONS &lt;dbl&gt;,
+#   `CAP SPACEALL` &lt;dbl&gt;, `ACTIVE53-MAN` &lt;dbl&gt;, DEADCAP &lt;dbl&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -275,18 +257,18 @@ Attaching package: 'dplyr'</code></pre>
 <h1>Data exploration through tables</h1>
 <p>Showing a bit of code to produce and save a summary table.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>summary_df <span class="ot">=</span> skimr<span class="sc">::</span><span class="fu">skim</span>(Stats)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(summary_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>summary_df <span class="ot">=</span> skimr<span class="sc">::</span><span class="fu">skim</span>(Stats)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(summary_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>── Data Summary ────────────────────────
                            Values
 Name                       Stats 
 Number of rows             32    
-Number of columns          6     
+Number of columns          12    
 _______________________          
 Column type frequency:           
   character                1     
-  numeric                  5     
+  numeric                  11    
 ________________________         
 Group variables            None  
 
@@ -295,63 +277,34 @@ Group variables            None
 1 Team                  0             1  13  21     0       32          0
 
 ── Variable type: numeric ──────────────────────────────────────────────────────
-  skim_variable       n_missing complete_rate    mean     sd      p0     p25
-1 Wins                        0             1   8.5    2.75    2       7    
-2 Losses                      0             1   8.5    2.75    4       6    
-3 Win_Loss_Percentage         0             1   0.500  0.162   0.118   0.412
-4 Points_For                  0             1 370.    71.9   236     330.   
-5 Points_Against              0             1 370.    49.9   280     330    
-      p50     p75    p100 hist 
-1   9      11      13     ▃▂▅▇▇
-2   8      10      15     ▇▇▅▂▃
-3   0.529   0.647   0.765 ▃▂▅▇▇
-4 365     402.    509     ▂▅▇▂▃
-5 369     399     518     ▆▇▇▂▁</code></pre>
+   skim_variable        n_missing complete_rate          mean           sd
+ 1 Wins                         0             1         8.5          2.75 
+ 2 Losses                       0             1         8.5          2.75 
+ 3 Win_Percentage               0             1         0.504        0.161
+ 4 Points_For                   0             1       370.          71.9  
+ 5 Points_Against               0             1       370.          49.9  
+ 6 PLAYERSACTIVE                0             1        53.0          0.474
+ 7 AVG AGETEAM                  0             1        26.4          0.514
+ 8 TOTAL_CAPALLOCATIONS         0             1 221657893.     6308982.   
+ 9 CAP SPACEALL                 0             1   7792023.     7868094.   
+10 ACTIVE53-MAN                 0             1 152636106.    24505676.   
+11 DEADCAP                      0             1  38620348.    21185078.   
+              p0           p25           p50           p75          p100 hist 
+ 1         2             7             9            11            13     ▃▂▅▇▇
+ 2         4             6             8            10            15     ▇▇▅▂▃
+ 3         0.118         0.412         0.529         0.647         0.765 ▃▂▃▇▆
+ 4       236           330.          365           402.          509     ▂▅▇▂▃
+ 5       280           330           369           399           518     ▆▇▇▂▁
+ 6        52            53            53            53            54     ▁▁▇▁▁
+ 7        25            26.1          26.4          26.9          27.2   ▁▂▇▅▆
+ 8 199530464     218238469.    222323832     223898891.    232771942     ▁▁▅▇▃
+ 9   -801620       3396322.      6655017       9060576.     37989804     ▇▇▁▁▁
+10 107314612     132378112.    152874542.    172955681.    194829168     ▃▇▃▆▃
+11   4451550      22839174.     33304760.     56801662.     81574757     ▃▇▂▃▂</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save to file</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>summarytable_file <span class="ot">=</span> <span class="fu">here</span>(<span class="st">"starter-analysis-exercise"</span>,<span class="st">"results"</span>, <span class="st">"tables-files"</span>, <span class="st">"summarytable.rds"</span>)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(summary_df, <span class="at">file =</span> summarytable_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>summary_df2 <span class="ot">=</span> skimr<span class="sc">::</span><span class="fu">skim</span>(Salary)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(summary_df2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>── Data Summary ────────────────────────
-                           Values
-Name                       Salary
-Number of rows             32    
-Number of columns          8     
-_______________________          
-Column type frequency:           
-  character                2     
-  numeric                  6     
-________________________         
-Group variables            None  
-
-── Variable type: character ────────────────────────────────────────────────────
-  skim_variable n_missing complete_rate min max empty n_unique whitespace
-1 Team                  0             1  13  21     0       32          0
-2 RECORD                0             1   6   7     0       11          0
-
-── Variable type: numeric ──────────────────────────────────────────────────────
-  skim_variable        n_missing complete_rate        mean           sd
-1 PLAYERSACTIVE                0             1        53.0        0.474
-2 AVG AGETEAM                  0             1        26.4        0.514
-3 TOTAL CAPALLOCATIONS         0             1 221657893.   6308982.   
-4 CAP SPACEALL                 0             1   7792023.   7868094.   
-5 ACTIVE53-MAN                 0             1 152636106.  24505676.   
-6 DEADCAP                      0             1  38620348.  21185078.   
-         p0         p25         p50         p75        p100 hist 
-1        52        53          53          53          54   ▁▁▇▁▁
-2        25        26.1        26.4        26.9        27.2 ▁▂▇▅▆
-3 199530464 218238469.  222323832   223898891.  232771942   ▁▁▅▇▃
-4   -801620   3396322.    6655017     9060576.   37989804   ▇▇▁▁▁
-5 107314612 132378112.  152874542.  172955681.  194829168   ▃▇▃▆▃
-6   4451550  22839174.   33304760.   56801662.   81574757   ▃▇▂▃▂</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save to file</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>summarytable_file2 <span class="ot">=</span> <span class="fu">here</span>(<span class="st">"starter-analysis-exercise"</span>,<span class="st">"results"</span>, <span class="st">"tables-files"</span>, <span class="st">"summarytable.rds"</span>)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(summary_df2, <span class="at">file =</span> summarytable_file2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save to file</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>summarytable_file <span class="ot">=</span> <span class="fu">here</span>(<span class="st">"starter-analysis-exercise"</span>,<span class="st">"results"</span>, <span class="st">"tables-files"</span>, <span class="st">"summarytable.rds"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(summary_df, <span class="at">file =</span> summarytable_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We are saving the results to the <code>results/tables</code> folder. Structure the folders inside <code>results</code> such that they make sense for your specific analysis. Provide enough documentation that someone can understand what you are doing and what goes where. <code>readme.md</code> files inside each folder are a good idea.</p>
 </section>
@@ -360,36 +313,128 @@ Group variables            None
 <p>Histogram plots for the continuous outcomes.</p>
 <p>Wins first.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> Stats <span class="sc">%&gt;%</span> </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Wins)) <span class="sc">+</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill=</span><span class="st">"steel blue"</span>) </span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>figure_file <span class="ot">=</span> <span class="fu">here</span>(<span class="st">"starter-analysis-exercise"</span>,<span class="st">"results"</span>,<span class="st">"figures"</span>,<span class="st">"wins-distribution.png"</span>)</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> figure_file, <span class="at">plot=</span>p1) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> Stats <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Wins)) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill=</span><span class="st">"steel blue"</span>) </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>figure_file <span class="ot">=</span> <span class="fu">here</span>(<span class="st">"starter-analysis-exercise"</span>,<span class="st">"results"</span>,<span class="st">"figures"</span>,<span class="st">"wins-distribution.png"</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> figure_file, <span class="at">plot=</span>p1) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Saving 7 x 5 in image</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="eda_NFL_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<p><img src="eda_NFL_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Now Active Salary.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> Salary <span class="sc">%&gt;%</span> </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(Team, <span class="st">`</span><span class="at">ACTIVE53-MAN</span><span class="st">`</span>), <span class="at">y =</span> <span class="st">`</span><span class="at">ACTIVE53-MAN</span><span class="st">`</span>)) <span class="sc">+</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill=</span><span class="st">"darkgreen"</span>) <span class="sc">+</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Active Salary by Team"</span>, <span class="at">x =</span> <span class="st">"Team"</span>, <span class="at">y =</span> <span class="st">"Active Salary"</span>)</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>figure_file2 <span class="ot">=</span> <span class="fu">here</span>(<span class="st">"starter-analysis-exercise"</span>,<span class="st">"results"</span>,<span class="st">"figures"</span>,<span class="st">"active-salary-distribution.png"</span>)</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> figure_file2, <span class="at">plot=</span>p2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> Stats <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(Team, <span class="st">`</span><span class="at">ACTIVE53-MAN</span><span class="st">`</span>), <span class="at">y =</span> <span class="st">`</span><span class="at">ACTIVE53-MAN</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">fill=</span><span class="st">"darkgreen"</span>) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Active Salary by Team"</span>, <span class="at">x =</span> <span class="st">"Team"</span>, <span class="at">y =</span> <span class="st">"Active Salary"</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>figure_file2 <span class="ot">=</span> <span class="fu">here</span>(<span class="st">"starter-analysis-exercise"</span>,<span class="st">"results"</span>,<span class="st">"figures"</span>,<span class="st">"active-salary-distribution.png"</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> figure_file2, <span class="at">plot=</span>p2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Saving 7 x 5 in image</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="eda_NFL_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<p><img src="eda_NFL_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>median_points_for <span class="ot">&lt;-</span> <span class="fu">median</span>(Stats<span class="sc">$</span>Points_For)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>median_points_for</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 365</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>median_points_against <span class="ot">&lt;-</span> <span class="fu">median</span>(Stats<span class="sc">$</span>Points_Against)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>median_points_against</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 369</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>median_wins <span class="ot">&lt;-</span> <span class="fu">median</span>(Stats<span class="sc">$</span>Wins)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>median_wins</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+</div>
+<p>#create images</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>Stats<span class="sc">$</span>image_file <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"team_images/"</span>, Stats<span class="sc">$</span>Team, <span class="st">".png"</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Stats<span class="sc">$</span>image_file)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Length     Class      Mode 
+       32 character character </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>(Stats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 32 × 13
+   Team       Wins Losses Win_Percentage Points_For Points_Against PLAYERSACTIVE
+   &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;          &lt;dbl&gt;      &lt;dbl&gt;          &lt;dbl&gt;         &lt;dbl&gt;
+ 1 Arizona …     4     13          0.235        330            455            53
+ 2 Atlanta …     7     10          0.529        321            373            54
+ 3 Baltimor…    13      4          0.765        483            280            53
+ 4 Buffalo …    11      6          0.647        451            311            53
+ 5 Carolina…     2     15          0.118        236            416            53
+ 6 Chicago …     7     10          0.412        360            379            52
+ 7 Cincinna…     9      8          0.529        366            384            53
+ 8 Clevelan…    11      6          0.647        396            362            53
+ 9 Dallas C…    12      5          0.706        509            315            53
+10 Denver B…     8      9          0.471        357            413            53
+# ℹ 22 more rows
+# ℹ 6 more variables: `AVG AGETEAM` &lt;dbl&gt;, TOTAL_CAPALLOCATIONS &lt;dbl&gt;,
+#   `CAP SPACEALL` &lt;dbl&gt;, `ACTIVE53-MAN` &lt;dbl&gt;, DEADCAP &lt;dbl&gt;, image_file &lt;chr&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>points_for_wins <span class="ot">&lt;-</span> Stats <span class="sc">%&gt;%</span> </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Wins,Points_For))<span class="sc">+</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">2</span>,<span class="dv">16</span>)<span class="sc">+</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">175</span>,<span class="dv">575</span>)<span class="sc">+</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">365</span>)<span class="sc">+</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="dv">9</span>) <span class="sc">+</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_image</span>(<span class="fu">aes</span>(<span class="at">image =</span> image_file), <span class="at">size =</span> <span class="fl">0.03</span>, <span class="at">asp =</span> <span class="fl">4.0</span>)</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>points_for_wins</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="eda_NFL_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>points_against_wins <span class="ot">&lt;-</span> Stats <span class="sc">%&gt;%</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Wins,Points_Against))<span class="sc">+</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">2</span>,<span class="dv">16</span>)<span class="sc">+</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">175</span>,<span class="dv">575</span>)<span class="sc">+</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">369</span>)<span class="sc">+</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">9</span>)<span class="sc">+</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_image</span>(<span class="fu">aes</span>(<span class="at">image=</span>image_file), <span class="at">size =</span> <span class="fl">0.03</span>, <span class="at">asp =</span> <span class="fl">4.0</span>)</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>points_against_wins</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="eda_NFL_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>points_for_against <span class="ot">&lt;-</span> Stats <span class="sc">%&gt;%</span> </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Points_For, Points_Against))<span class="sc">+</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">175</span>,<span class="dv">575</span>)<span class="sc">+</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">175</span>,<span class="dv">575</span>)<span class="sc">+</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">369</span>)<span class="sc">+</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept=</span><span class="dv">365</span>)<span class="sc">+</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_image</span>(<span class="fu">aes</span>(<span class="at">image =</span> image_file), <span class="at">size =</span> <span class="fl">0.03</span>, <span class="at">asp =</span> <span class="fl">4.0</span>)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>points_for_against</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="eda_NFL_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 

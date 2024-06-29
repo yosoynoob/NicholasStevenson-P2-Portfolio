@@ -1,0 +1,100 @@
+---
+title: "Data Exercise"
+---
+
+
+```{r, warning=FALSE, message=FALSE}
+library(mice)
+library(ggmice)
+library(ggplot2)
+library(patchwork)
+library(psych)
+library(purrr)
+library(synthpop)
+```
+
+```{r}
+set.seed(1)
+```
+
+```{r}
+heart_failure <- readRDS(url("https://thomvolker.github.io/UMCUSynthetic/data/heart_failure.RDS"))
+```
+
+```{r}
+head(heart_failure)
+```
+```{r}
+summary(heart_failure)
+```
+```{r}
+describe(heart_failure)
+```
+```{r}
+where <- make.where(heart_failure, "all")
+```
+
+```{r}
+method <- make.method(heart_failure, where = where)
+method[method == "pmm"] <- "norm"
+```
+
+```{r}
+syn_param <- mice(heart_failure,
+                  m = 10,
+                  maxit = 1,
+                  metod = method,
+                  where = where,
+                  printFlag = FALSE)
+```
+
+```{r}
+complete(syn_param, 4) %>% 
+  head(10)
+heart_failure %>% 
+  head(10)
+```
+```{r}
+complete(syn_param, 6) %>% 
+  describe()
+heart_failure %>% 
+  describe()
+```
+
+```{r, warning=FALSE}
+colnames(heart_failure)[map_lgl(heart_failure, is.factor)] %>%
+  map(~ ggmice(syn_param, mapping = aes_string(.x, group = '.imp')) +
+        geom_bar(mapping = aes(y = ..prop..),
+                 position = position_dodge2(),
+                 fill = "transparent",
+                 show.legend = FALSE)) %>% 
+  patchwork::wrap_plots()
+```
+
+```{r}
+colnames(heart_failure)[map_lgl(heart_failure, is.numeric)] %>%
+  map(~ ggmice(data = syn_param, 
+               mapping = aes_string(x = .x, group = '.imp')) +
+        geom_density(show.legend = F)) %>%
+  wrap_plots(ncol = 2)
+```
+
+```{r}
+with(syn_param, glm(deceased ~ age + diabetes + smoking + follow_up, 
+                    family = binomial)) |>
+  pool(rule = "reiter2003") |>
+  summary() |>
+  as.data.frame() |>
+  tibble::column_to_rownames('term') |>
+  round(3)
+```
+
+```{r}
+ glm(deceased ~ age + diabetes + smoking + follow_up, 
+     family = binomial,
+     data = heart_failure) |>
+  broom::tidy() |>
+  tibble::column_to_rownames('term') |>
+  round(3)
+```
+
