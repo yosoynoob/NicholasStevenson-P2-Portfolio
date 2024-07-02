@@ -278,5 +278,12 @@
     "title": "Tidy Tuesday Exercise",
     "section": "",
     "text": "Placeholder file for the future Tidy Tuesday exercise."
+  },
+  {
+    "objectID": "cdcdata-exercise/cdcdata-exercise.html",
+    "href": "cdcdata-exercise/cdcdata-exercise.html",
+    "title": "CDC Data Exercise",
+    "section": "",
+    "text": "This dataset of U.S. mortality trends since 1900 highlights the differences in age-adjusted death rates and life expectancy at birth by race and sex. The dataset contains 1,071 observations along with five columns. The five variables are year, race, sex, average life expectancy, and age-adjusted death rate.\nThe dataset can be downloaded here.\n\nlibrary(readr)\n\n\n#load the file\ndeath_rate &lt;- read_csv(\"NCHS_-_Death_rates_and_life_expectancy_at_birth_20240702.csv\")\n\nRows: 1071 Columns: 5\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr (2): Race, Sex\ndbl (3): Year, Average Life Expectancy (Years), Age-adjusted Death Rate\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\n\n\nhead(death_rate)\n\n# A tibble: 6 × 5\n   Year Race      Sex        Average Life Expectancy (Y…¹ Age-adjusted Death R…²\n  &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;                             &lt;dbl&gt;                  &lt;dbl&gt;\n1  1900 All Races Both Sexes                         47.3                  2518 \n2  1901 All Races Both Sexes                         49.1                  2473.\n3  1902 All Races Both Sexes                         51.5                  2301.\n4  1903 All Races Both Sexes                         50.5                  2379 \n5  1904 All Races Both Sexes                         47.6                  2502.\n6  1905 All Races Both Sexes                         48.7                  2424.\n# ℹ abbreviated names: ¹​`Average Life Expectancy (Years)`,\n#   ²​`Age-adjusted Death Rate`"
   }
 ]

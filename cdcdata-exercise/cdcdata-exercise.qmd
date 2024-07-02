@@ -1,0 +1,20 @@
+---
+title: "CDC Data Exercise"
+---
+
+This dataset of U.S. mortality trends since 1900 highlights the differences in age-adjusted death rates and life expectancy at birth by race and sex. The dataset contains 1,071 observations along with five columns. The five variables are `year`, `race`, `sex`, `average life expectancy`, and `age-adjusted death rate`.
+
+The dataset can be downloaded [here](https://data.cdc.gov/NCHS/NCHS-Death-rates-and-life-expectancy-at-birth/w9j2-ggv5/about_data "Death rates and life expectancy at birth").
+
+```{r, warning=FALSE}
+library(readr)
+```
+
+```{r}
+#load the file
+death_rate <- read_csv("NCHS_-_Death_rates_and_life_expectancy_at_birth_20240702.csv")
+```
+```{r}
+head(death_rate)
+```
+
