@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Nicholas Stevenson">
-<meta name="dcterms.date" content="2024-06-24">
+<meta name="dcterms.date" content="2024-07-02">
 
 <title>Nicholas Stevenson - Data Analysis Portfolio - Manuscript/Report Template for a Data Analysis Project</title>
 <style>
@@ -160,6 +160,10 @@ div.csl-indent {
     <a class="dropdown-item" href="../../../tidytuesday-exercise/tidytuesday-exercise.html" rel="" target="">
  <span class="dropdown-text">Tidy Tuesday Exercise</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../../data-exercise/data-exercise.html" rel="" target="">
+ <span class="dropdown-text">Data Exercise</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -203,7 +207,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 24, 2024</p>
+      <p class="date">July 2, 2024</p>
     </div>
   </div>
   
@@ -274,26 +278,23 @@ div.csl-indent {
 <table class="table table-sm table-striped small">
 <caption>Table&nbsp;1: Data summary table.</caption>
 <colgroup>
-<col style="width: 3%">
-<col style="width: 5%">
-<col style="width: 3%">
-<col style="width: 5%">
+<col style="width: 4%">
+<col style="width: 8%">
+<col style="width: 4%">
 <col style="width: 5%">
 <col style="width: 5%">
 <col style="width: 5%">
 <col style="width: 6%">
 <col style="width: 7%">
+<col style="width: 8%">
 <col style="width: 5%">
 <col style="width: 5%">
-<col style="width: 6%">
-<col style="width: 4%">
-<col style="width: 3%">
-<col style="width: 3%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
-<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 5%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -306,9 +307,6 @@ div.csl-indent {
 <th style="text-align: right;">character.empty</th>
 <th style="text-align: right;">character.n_unique</th>
 <th style="text-align: right;">character.whitespace</th>
-<th style="text-align: left;">factor.ordered</th>
-<th style="text-align: right;">factor.n_unique</th>
-<th style="text-align: left;">factor.top_counts</th>
 <th style="text-align: right;">numeric.mean</th>
 <th style="text-align: right;">numeric.sd</th>
 <th style="text-align: right;">numeric.p0</th>
@@ -322,17 +320,14 @@ div.csl-indent {
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">character</td>
-<td style="text-align: left;">Dating_App</td>
+<td style="text-align: left;">Team</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">6</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">21</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">3</td>
+<td style="text-align: right;">32</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
@@ -343,8 +338,8 @@ div.csl-indent {
 <td style="text-align: left;">NA</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">factor</td>
-<td style="text-align: left;">Gender</td>
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">Wins</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">NA</td>
@@ -352,21 +347,18 @@ div.csl-indent {
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
-<td style="text-align: left;">FALSE</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: left;">M: 4, F: 3, O: 2</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: right;">8.500000e+00</td>
+<td style="text-align: right;">2.747433e+00</td>
+<td style="text-align: right;">2.000</td>
+<td style="text-align: right;">7.000000e+00</td>
+<td style="text-align: right;">9.000000e+00</td>
+<td style="text-align: right;">1.100000e+01</td>
+<td style="text-align: right;">1.300000e+01</td>
+<td style="text-align: left;">▃▂▅▇▇</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">numeric</td>
-<td style="text-align: left;">Height</td>
+<td style="text-align: left;">Losses</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">NA</td>
@@ -374,21 +366,18 @@ div.csl-indent {
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">165.66667</td>
-<td style="text-align: right;">15.97655</td>
-<td style="text-align: right;">133</td>
-<td style="text-align: right;">156</td>
-<td style="text-align: right;">166</td>
-<td style="text-align: right;">178</td>
-<td style="text-align: right;">183</td>
-<td style="text-align: left;">▂▁▃▃▇</td>
+<td style="text-align: right;">8.500000e+00</td>
+<td style="text-align: right;">2.747433e+00</td>
+<td style="text-align: right;">4.000</td>
+<td style="text-align: right;">6.000000e+00</td>
+<td style="text-align: right;">8.000000e+00</td>
+<td style="text-align: right;">1.000000e+01</td>
+<td style="text-align: right;">1.500000e+01</td>
+<td style="text-align: left;">▇▇▅▂▃</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">numeric</td>
-<td style="text-align: left;">Weight</td>
+<td style="text-align: left;">Win_Percentage</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">NA</td>
@@ -396,21 +385,18 @@ div.csl-indent {
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">70.11111</td>
-<td style="text-align: right;">21.24526</td>
-<td style="text-align: right;">45</td>
-<td style="text-align: right;">55</td>
-<td style="text-align: right;">70</td>
-<td style="text-align: right;">80</td>
-<td style="text-align: right;">110</td>
-<td style="text-align: left;">▇▂▃▂▂</td>
+<td style="text-align: right;">5.035937e-01</td>
+<td style="text-align: right;">1.608738e-01</td>
+<td style="text-align: right;">0.118</td>
+<td style="text-align: right;">4.120000e-01</td>
+<td style="text-align: right;">5.290000e-01</td>
+<td style="text-align: right;">6.470000e-01</td>
+<td style="text-align: right;">7.650000e-01</td>
+<td style="text-align: left;">▃▂▃▇▆</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">numeric</td>
-<td style="text-align: left;">Age</td>
+<td style="text-align: left;">Points_For</td>
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">NA</td>
@@ -418,17 +404,147 @@ div.csl-indent {
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
+<td style="text-align: right;">3.700625e+02</td>
+<td style="text-align: right;">7.186768e+01</td>
+<td style="text-align: right;">236.000</td>
+<td style="text-align: right;">3.297500e+02</td>
+<td style="text-align: right;">3.650000e+02</td>
+<td style="text-align: right;">4.025000e+02</td>
+<td style="text-align: right;">5.090000e+02</td>
+<td style="text-align: left;">▂▅▇▂▃</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">Points_Against</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
 <td style="text-align: right;">NA</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: right;">30.77778</td>
-<td style="text-align: right;">16.93943</td>
-<td style="text-align: right;">16</td>
-<td style="text-align: right;">25</td>
-<td style="text-align: right;">25</td>
-<td style="text-align: right;">28</td>
-<td style="text-align: right;">74</td>
-<td style="text-align: left;">▇▂▁▁▁</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">3.700625e+02</td>
+<td style="text-align: right;">4.990503e+01</td>
+<td style="text-align: right;">280.000</td>
+<td style="text-align: right;">3.300000e+02</td>
+<td style="text-align: right;">3.690000e+02</td>
+<td style="text-align: right;">3.990000e+02</td>
+<td style="text-align: right;">5.180000e+02</td>
+<td style="text-align: left;">▆▇▇▂▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">PLAYERSACTIVE</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">5.296875e+01</td>
+<td style="text-align: right;">4.741291e-01</td>
+<td style="text-align: right;">52.000</td>
+<td style="text-align: right;">5.300000e+01</td>
+<td style="text-align: right;">5.300000e+01</td>
+<td style="text-align: right;">5.300000e+01</td>
+<td style="text-align: right;">5.400000e+01</td>
+<td style="text-align: left;">▁▁▇▁▁</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">AVG AGETEAM</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">2.637500e+01</td>
+<td style="text-align: right;">5.136837e-01</td>
+<td style="text-align: right;">25.000</td>
+<td style="text-align: right;">2.607500e+01</td>
+<td style="text-align: right;">2.635000e+01</td>
+<td style="text-align: right;">2.690000e+01</td>
+<td style="text-align: right;">2.720000e+01</td>
+<td style="text-align: left;">▁▂▇▅▆</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">TOTAL_CAPALLOCATIONS</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">2.216579e+08</td>
+<td style="text-align: right;">6.308982e+06</td>
+<td style="text-align: right;">199530464.000</td>
+<td style="text-align: right;">2.182385e+08</td>
+<td style="text-align: right;">2.223238e+08</td>
+<td style="text-align: right;">2.238989e+08</td>
+<td style="text-align: right;">2.327719e+08</td>
+<td style="text-align: left;">▁▁▅▇▃</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">CAP SPACEALL</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">7.792023e+06</td>
+<td style="text-align: right;">7.868094e+06</td>
+<td style="text-align: right;">-801620.000</td>
+<td style="text-align: right;">3.396323e+06</td>
+<td style="text-align: right;">6.655017e+06</td>
+<td style="text-align: right;">9.060576e+06</td>
+<td style="text-align: right;">3.798980e+07</td>
+<td style="text-align: left;">▇▇▁▁▁</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">ACTIVE53-MAN</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">1.526361e+08</td>
+<td style="text-align: right;">2.450568e+07</td>
+<td style="text-align: right;">107314612.000</td>
+<td style="text-align: right;">1.323781e+08</td>
+<td style="text-align: right;">1.528745e+08</td>
+<td style="text-align: right;">1.729557e+08</td>
+<td style="text-align: right;">1.948292e+08</td>
+<td style="text-align: left;">▃▇▃▆▃</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">DEADCAP</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">3.862035e+07</td>
+<td style="text-align: right;">2.118508e+07</td>
+<td style="text-align: right;">4451550.000</td>
+<td style="text-align: right;">2.283917e+07</td>
+<td style="text-align: right;">3.330476e+07</td>
+<td style="text-align: right;">5.680166e+07</td>
+<td style="text-align: right;">8.157476e+07</td>
+<td style="text-align: left;">▃▇▂▃▂</td>
 </tr>
 </tbody>
 </table>

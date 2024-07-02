@@ -2,7 +2,7 @@
 title: "Data Exercise"
 ---
 
-
+**Exercise in writing synthetic data**
 ```{r, warning=FALSE, message=FALSE}
 library(mice)
 library(ggmice)
