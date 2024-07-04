@@ -6,15 +6,64 @@ This dataset of U.S. mortality trends since 1900 highlights the differences in a
 
 The dataset can be downloaded [here](https://data.cdc.gov/NCHS/NCHS-Death-rates-and-life-expectancy-at-birth/w9j2-ggv5/about_data "Death rates and life expectancy at birth").
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, message=FALSE}
 library(readr)
+library(dplyr)
+library(ggplot2)
 ```
 
 ```{r}
 #load the file
 death_rate <- read_csv("NCHS_-_Death_rates_and_life_expectancy_at_birth_20240702.csv")
 ```
+
 ```{r}
 head(death_rate)
+```
+
+```{r}
+#Remove "Both Sexes" from the "Sex" column and keep only male and female
+death2 <- death_rate %>%
+  filter(Sex != "Both Sexes")
+```
+
+```{r}
+#View the new dataset to ensure correct variables
+View(death2)
+```
+
+```{r, warning=FALSE}
+# Summary statistics for Average Life Expectancy
+life_expectancy_summary <- summary(death2$`Average Life Expectancy (Years)`)
+print(life_expectancy_summary)
+
+# Histogram of Average Life Expectancy
+AvgLifeExp_plot <- ggplot(death2, aes(x = `Average Life Expectancy (Years)`)) +
+  geom_histogram(binwidth = 1, fill = "orange", color = "black") +
+  labs(title = "Distribution of Average Life Expectancy", x = "Average Life Expectancy (years)", y = "Count")
+AvgLifeExp_plot
+```
+
+```{r}
+# Summary statistics for Age-adjusted Death Rate
+death_rate_summary <- summary(death2$`Age-adjusted Death Rate`)
+print(death_rate_summary)
+
+# Histogram of Age-adjusted Death Rate
+ggplot(death2, aes(x = `Age-adjusted Death Rate`)) +
+  geom_histogram(binwidth = 50, fill = "red", color = "black") +
+  labs(title = "Distribution of Age-adjusted Death Rate", x = "Age-adjusted Death Rate", y = "Count")
+
+```
+
+```{r, warning=FALSE}
+#plot with gradient color scale
+AvgLife_Race_plot <- ggplot(death2, aes(x = Race, y = `Average Life Expectancy (Years)`, color = `Average Life Expectancy (Years)`)) +
+  geom_point(size = 5) +
+  scale_color_gradient(low = "red", high = "green") +
+  labs(title = "Average Life Expectancy by Race", x = "Race", y = "Average Life Expectancy (Years)") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+AvgLife_Race_plot
 ```
 
