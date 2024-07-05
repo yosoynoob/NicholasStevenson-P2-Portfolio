@@ -22,7 +22,8 @@ Load the data.
 ```{r}
 # path to data
 # note the use of the here() package and not absolute paths
-NFL_data <- "C:/Users/nstev.000/Documents/MSDA/24Sum_DA 6833/Repositories/NicholasStevenson-P2-Portfolio/starter-analysis-exercise/data/raw-data/NFL_data.xlsx"
+NFL_data <- here("starter-analysis-exercise", "data", "raw-data", "NFL_data.xlsx")
+
 ```
 
 # Check data
